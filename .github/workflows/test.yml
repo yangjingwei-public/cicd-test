@@ -1,0 +1,31 @@
+name: Deploy with Python Script
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # - name: Checkout code
+    #   uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.12.3  # 指定Python版本
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # 安装依赖
+
+    - name: Run Deployment Script # 运行部署脚本
+      run: python deploy.py
+      
+    - name: Run a one-line script # 运行单行指令
+      run: echo test, Run a one-line script.
+
+    - name: Run a multi-line script # 运行多行指令
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project. 
